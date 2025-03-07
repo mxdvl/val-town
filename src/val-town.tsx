@@ -12,7 +12,6 @@ export default function Command() {
 
   useEffect(() => {
     const document = parser.parseFromString(String(data), "text/html");
-    // console.log(document.body.innerHTML.length, "bytes");
     setVals(
       [...document.querySelectorAll("a[href]")].flatMap((element) => {
         if (element instanceof HTMLAnchorElement) {
@@ -30,20 +29,23 @@ export default function Command() {
   }, [data]);
 
   return (
-    <List isLoading={isLoading}>
-      {vals.map(({ url, title }) => (
-        <List.Item
-          key={url}
-          title={title}
-          subtitle={url}
-          actions={
-            <ActionPanel>
-              <Action.OpenInBrowser url={url} />
-              <Action.CopyToClipboard content={url} />
-            </ActionPanel>
-          }
-        />
-      ))}
+    <List isLoading={isLoading} selectedItemId={vals[0]?.url}>
+      <List.Section title="Trending vals…">
+        {vals.map(({ url, title }) => (
+          <List.Item
+            key={url}
+            id={url}
+            title={title}
+            subtitle={url}
+            actions={
+              <ActionPanel>
+                <Action.OpenInBrowser url={url} />
+                <Action.CopyToClipboard content={url} />
+              </ActionPanel>
+            }
+          />
+        ))}
+      </List.Section>
     </List>
   );
 }
