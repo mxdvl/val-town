@@ -1,3 +1,5 @@
-# Val Town Changelog
+# val.town Changelog
 
-## [Initial Version] - {PR_MERGE_DATE}
+## [Added Val Town] - 2023-10-16
+
+Initial version code
